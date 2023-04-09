@@ -2,7 +2,7 @@ from pytube import YouTube, Playlist
 import os
 import subprocess
 
-path = "YouTube\\"
+path = os.path.join("YouTube\\")
 run = True
 video_quality="360p"    #Default video quality
 
@@ -14,8 +14,9 @@ def download_streams(type, download_video, download_audio):
     #Video
     if stream_video is not None:
         if download_video == "video": 
-            filename_video = f"{filename.split('.')[0]}_video.{filename.split('.')[1]}"  #Splits the filename into name and extension split by a .
-            video_path = path + filename_video
+            root_video, ext_video = os.path.splitext(filename)
+            filename_video = root_video + "_video" + ext_video
+            video_path = os.path.join(path + filename_video)
             stream_video.download(path, filename_video)
     else: 
         print(f"No suitable video stream found for {type.title}")
@@ -23,13 +24,14 @@ def download_streams(type, download_video, download_audio):
     #Audio
     if stream_audio is not None:
         if download_audio == "audio":
-            filename_audio = f"{filename.split('.')[0]}_audio.{filename.split('.')[1]}"
-            audio_path = path + filename_audio   
+            root_audio, root_ext = os.path.splitext(filename)
+            filename_audio = root_audio + "_audio" + root_ext
+            audio_path = os.path.join(path + filename_audio)   
             stream_audio.download(path, filename_audio) 
     else: 
         print(f"No suitable video stream found for {type.title}")
     
-    output_path = path + filename
+    output_path = os.path.join(path, filename)
 
     if download_audio == "audio" and download_video == "video":
         command = ['C:/ffmpeg/bin/ffmpeg.exe', '-i', video_path, '-i', audio_path, '-c', 'copy', output_path]     #Combine the video and audio file into a single file using ffmpeg
