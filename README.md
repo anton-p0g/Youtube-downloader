@@ -3,5 +3,7 @@
  
  Requisites:
  - Have pytube module installed on your computer
+ pip install pytube
  - Have ffmpeg program installed in C:/ffmpeg/bin/ffmpeg.exe
+ https://ffmpeg.org/download.html
  
