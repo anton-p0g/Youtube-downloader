@@ -11,8 +11,8 @@ def download_streams(type, download_video, download_audio):
     stream_audio = type.streams.filter(progressive=False, type="audio", mime_type="audio/webm").last()
     filename = stream_video.default_filename    #Get the youtube's video title as filename
     
+    #Video
     if stream_video is not None:
-        #Video
         if download_video == "video": 
             filename_video = f"{filename.split('.')[0]}_video.{filename.split('.')[1]}"  #Splits the filename into name and extension split by a .
             video_path = path + filename_video
