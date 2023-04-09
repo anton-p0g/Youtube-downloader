@@ -4,6 +4,7 @@ import subprocess
 
 path = "YouTube\\"
 run = True
+video_quality="360p"    #Default video quality
 
 def download_streams(type, download_video, download_audio):
     stream_video = type.streams.filter(progressive=False, mime_type="video/webm", res=video_quality).first()
